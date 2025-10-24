@@ -99,7 +99,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-black"
+            className="md:hidden text-black ml-auto"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
