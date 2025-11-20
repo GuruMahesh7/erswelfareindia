@@ -12,7 +12,7 @@ interface Nominee {
   bankHolderName: string;
 }
 
-interface Doctor {
+interface Engineer {
   _id: string;
   name: string;
   email: string;
@@ -27,23 +27,23 @@ interface Doctor {
 }
 
 export default function Deceased() {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [engineers, setEngineers] = useState<Engineer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchDeceasedDoctors = async () => {
+    const fetchDeceasedEngineers = async () => {
       try {
-        const data = await api.doctors.list('deceased');
-        setDoctors(data);
+        const data = await api.engineers.list('deceased');
+        setEngineers(data);
       } catch (err: any) {
-        setError(err.message || 'Failed to load deceased doctors');
+        setError(err.message || 'Failed to load deceased engineers');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchDeceasedDoctors();
+    fetchDeceasedEngineers();
   }, []);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -53,62 +53,62 @@ export default function Deceased() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Deceased Doctors</h1>
-          <p className="mt-2 text-gray-600">List of doctors who have passed away</p>
+          <h1 className="text-3xl font-bold text-gray-900">Deceased Engineers</h1>
+          <p className="mt-2 text-gray-600">List of engineers who have passed away</p>
         </div>
 
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-          {doctors.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">No deceased doctors found</div>
+          {engineers.length === 0 ? (
+            <div className="p-6 text-center text-gray-500">No deceased engineers found</div>
           ) : (
             <ul className="divide-y divide-gray-200">
-              {doctors.map((doctor) => (
-                <li key={doctor._id} className="p-6">
+              {engineers.map((engineer) => (
+                <li key={engineer._id} className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 h-12 w-12">
-                      {doctor.passportPhoto ? (
+                      {engineer.passportPhoto ? (
                         <img
-                          src={doctor.passportPhoto}
-                          alt={doctor.name}
+                          src={engineer.passportPhoto}
+                          alt={engineer.name}
                           className="h-12 w-12 rounded-full object-cover"
                         />
                       ) : (
                         <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                          {doctor.name.charAt(0)}
+                          {engineer.name.charAt(0)}
                         </div>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <h2 className="text-xl font-semibold text-gray-900">{doctor.name}</h2>
+                        <h2 className="text-xl font-semibold text-gray-900">{engineer.name}</h2>
                         <span className="text-sm text-gray-500">
-                          {new Date(doctor.deceasedDate).toLocaleDateString()}
+                          {new Date(engineer.deceasedDate).toLocaleDateString()}
                         </span>
                       </div>
                       <div className="mt-2 space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           <p className="text-sm text-gray-600">
-                            <span className="font-medium">Email:</span> {doctor.email}
+                            <span className="font-medium">Email:</span> {engineer.email}
                           </p>
                           <p className="text-sm text-gray-600">
-                            <span className="font-medium">Phone:</span> {doctor.phone}
+                            <span className="font-medium">Phone:</span> {engineer.phone}
                           </p>
                           <p className="text-sm text-gray-600">
-                            <span className="font-medium">Qualification:</span> {doctor.qualification}
+                            <span className="font-medium">Qualification:</span> {engineer.qualification}
                           </p>
-                          {doctor.deceasedDisease && (
+                          {engineer.deceasedDisease && (
                             <p className="text-sm text-gray-600">
-                              <span className="font-medium">Disease:</span> {doctor.deceasedDisease}
+                              <span className="font-medium">Disease:</span> {engineer.deceasedDisease}
                             </p>
                           )}
-                          {doctor.deceasedReason && (
+                          {engineer.deceasedReason && (
                             <p className="text-sm text-gray-600">
-                              <span className="font-medium">Reason:</span> {doctor.deceasedReason}
+                              <span className="font-medium">Reason:</span> {engineer.deceasedReason}
                             </p>
                           )}
                         </div>
 
-                        {doctor.nominee && (
+                        {engineer.nominee && (
                           <div className="mt-4">
                             <h3 className="text-lg font-semibold text-gray-900 mb-2">Nominee Details</h3>
                             <div className="bg-gray-50 rounded-lg overflow-hidden">
@@ -125,24 +125,24 @@ export default function Deceased() {
                                   <tr>
                                     <td className="px-4 py-3 text-sm text-gray-900">
                                       <div>
-                                        <p className="font-medium">{doctor.nominee.name}</p>
-                                        <p className="text-gray-500">{doctor.nominee.age} years, {doctor.nominee.sex}</p>
+                                        <p className="font-medium">{engineer.nominee.name}</p>
+                                        <p className="text-gray-500">{engineer.nominee.age} years, {engineer.nominee.sex}</p>
                                       </div>
                                     </td>
                                     <td className="px-4 py-3 text-sm text-gray-900">
                                       <div>
-                                        <p>{doctor.nominee.email}</p>
-                                        <p>{doctor.nominee.phone}</p>
+                                        <p>{engineer.nominee.email}</p>
+                                        <p>{engineer.nominee.phone}</p>
                                       </div>
                                     </td>
                                     <td className="px-4 py-3 text-sm">
                                       <div>
-                                        <p className="font-medium">{doctor.nominee.bankHolderName}</p>
-                                        <p className="text-gray-500">AC: {doctor.nominee.bankAccountNumber}</p>
+                                        <p className="font-medium">{engineer.nominee.bankHolderName}</p>
+                                        <p className="text-gray-500">AC: {engineer.nominee.bankAccountNumber}</p>
                                       </div>
                                     </td>
                                     <td className="px-4 py-3 text-sm font-mono">
-                                      {doctor.nominee.ifscCode}
+                                      {engineer.nominee.ifscCode}
                                     </td>
                                   </tr>
                                 </tbody>

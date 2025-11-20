@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Menu, X, Stethoscope } from 'lucide-react';
+import { Menu, X, HardHat } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
@@ -27,7 +27,7 @@ export default function Navbar() {
   const privateLinks = isAdmin 
     ? [{ path: '/admin', label: 'Admin Dashboard' }]
     : [
-        { path: '/doctors', label: 'Doctors' },
+        { path: '/engineers', label: 'Engineers' },
         { path: '/deceased', label: 'Deceased' },
         { path: '/profile', label: 'My Profile' },
       ];
@@ -35,13 +35,22 @@ export default function Navbar() {
   const activeLinks = isLoggedIn ? [...publicLinks, ...privateLinks] : publicLinks;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-steel-900 shadow-md border-b-2 border-steel-600 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16">
           {/* Logo - Left */}
           <Link to="/" className="flex items-center space-x-2">
-            <Stethoscope className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-blue-600">drswelfareindia</span>
+            <img
+              width="44"
+              height="44"
+              className="text-accent"
+              src="https://img.icons8.com/?size=100&id=KRjNOLMxdNYx&format=png&color=FCC419"
+              alt="engineer"
+            />
+            {/* <HardHat className="h-8 w-8 text-accent" /> */}
+            <span className="text-xl font-bold text-accent tracking-wide">
+              Erswelfareindia
+            </span>
           </Link>
 
           {/* Navigation Items - Center */}
@@ -52,7 +61,9 @@ export default function Navbar() {
                 to={link.path}
                 className={({ isActive }) =>
                   `text-sm px-2 py-1 rounded ${
-                    isActive ? 'text-blue-600 font-semibold' : 'text-black hover:text-blue-600'
+                    isActive
+                      ? "text-accent font-semibold"
+                      : "text-steel-200 hover:text-accent"
                   } transition-colors`
                 }
               >
@@ -76,7 +87,9 @@ export default function Navbar() {
                   to="/join"
                   className={({ isActive }) =>
                     `text-sm px-3 py-1 rounded-lg transition-colors ${
-                      isActive ? 'bg-blue-700 text-white font-semibold' : 'bg-blue-600 text-white hover:bg-blue-700'
+                      isActive
+                        ? "bg-accent text-white font-semibold"
+                        : "bg-accent text-white hover:bg-accent"
                     }`
                   }
                 >
@@ -87,7 +100,9 @@ export default function Navbar() {
                   to="/login"
                   className={({ isActive }) =>
                     `text-sm px-3 py-1 rounded-lg transition-colors border ${
-                      isActive ? 'border-blue-700 text-blue-700 font-semibold' : 'border-blue-600 text-blue-600 hover:bg-blue-50'
+                      isActive
+                        ? "border-accent text-accent font-semibold"
+                        : "border-accent text-accent hover:bg-steel-50"
                     }`
                   }
                 >
@@ -99,7 +114,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-black ml-auto"
+            className="md:hidden text-steel-200 ml-auto"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -116,7 +131,9 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `block py-2 text-sm rounded ${
-                    isActive ? 'text-blue-600 font-semibold' : 'text-black hover:text-blue-600'
+                    isActive
+                      ? "text-accent font-semibold"
+                      : "text-black hover:text-accent"
                   } transition-colors`
                 }
               >
@@ -141,7 +158,9 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     `block text-center text-sm px-4 py-2 rounded-lg transition-colors ${
-                      isActive ? 'bg-blue-700 text-white font-semibold' : 'bg-blue-600 text-white hover:bg-blue-700'
+                      isActive
+                        ? "bg-accent text-white font-semibold"
+                        : "bg-accent text-white hover:bg-accent"
                     }`
                   }
                 >
@@ -153,7 +172,9 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   className={({ isActive }) =>
                     `block text-center text-sm px-4 py-2 rounded-lg transition-colors border ${
-                      isActive ? 'border-blue-700 text-blue-700 font-semibold' : 'border-blue-600 text-blue-600 hover:bg-blue-50'
+                      isActive
+                        ? "border-accent text-accent font-semibold"
+                        : "border-accent text-accent hover:bg-steel-50"
                     }`
                   }
                 >

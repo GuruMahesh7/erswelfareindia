@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api/backend';
 import { useAuth } from '../context/AuthContext';
 
-interface Doctor {
+interface Engineer {
   _id: string;
   name: string;
   email: string;
@@ -16,10 +16,10 @@ interface Doctor {
 }
 
 export default function Admin() {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [engineers, setEngineers] = useState<Engineer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
+  const [selectedEngineer, setSelectedEngineer] = useState<Engineer | null>(null);
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'deceased'>('all');
   const [approvalData, setApprovalData] = useState({
     disease: '',
@@ -35,47 +35,47 @@ export default function Admin() {
     }
   }, [isAdmin, navigate]);
 
-  const fetchDoctors = async () => {
+  const fetchEngineers = async () => {
     try {
-      const data = await api.doctors.list(filter !== 'all' ? filter : undefined);
-      setDoctors(data);
+      const data = await api.engineers.list(filter !== 'all' ? filter : undefined);
+      setEngineers(data);
     } catch (err: any) {
-      setError(err.message || 'Failed to load doctors');
+      setError(err.message || 'Failed to load engineers');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchDoctors();
+    fetchEngineers();
   }, []);
 
-  const handleApprove = async (doctorId: string) => {
+  const handleApprove = async (engineerId: string) => {
     try {
       if (!approvalData.disease) {
         alert('Please enter disease name');
         return;
       }
-      await api.doctors.approve(doctorId, {
+      await api.engineers.approve(engineerId, {
         disease: approvalData.disease,
         message: approvalData.message
       });
       // Refresh the list
-      fetchDoctors();
-      setSelectedDoctor(null);
+      fetchEngineers();
+      setSelectedEngineer(null);
       setApprovalData({ disease: '', message: '' });
     } catch (err: any) {
-      alert(err.message || 'Failed to approve doctor');
+      alert(err.message || 'Failed to approve engineer');
     }
   };
 
-  const handleMarkDeceased = async (doctorId: string, data: { reason?: string; diseaseName?: string }) => {
+  const handleMarkDeceased = async (engineerId: string, data: { reason?: string; diseaseName?: string }) => {
     try {
-      await api.doctors.deceased(doctorId, data);
+      await api.engineers.deceased(engineerId, data);
       // Refresh the list
-      fetchDoctors();
+      fetchEngineers();
     } catch (err: any) {
-      alert(err.message || 'Failed to mark doctor as deceased');
+      alert(err.message || 'Failed to mark engineer as deceased');
     }
   };
 
@@ -87,23 +87,23 @@ export default function Admin() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-          <p className="mt-2 text-gray-600">Manage doctor approvals and registrations</p>
+          <p className="mt-2 text-gray-600">Manage engineer approvals and registrations</p>
         </div>
 
         <div className="mb-6">
           <label htmlFor="filter" className="block text-sm font-medium text-gray-700 mb-2">
-            Filter Doctors
+            Filter Engineers
           </label>
           <select
             id="filter"
             value={filter}
             onChange={(e) => {
               setFilter(e.target.value as typeof filter);
-              fetchDoctors();
+              fetchEngineers();
             }}
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           >
-            <option value="all">All Doctors</option>
+            <option value="all">All Engineers</option>
             <option value="pending">Pending Approval</option>
             <option value="approved">Approved</option>
             <option value="deceased">Deceased</option>
@@ -112,22 +112,22 @@ export default function Admin() {
 
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="divide-y divide-gray-200">
-            {doctors.length === 0 ? (
+            {engineers.length === 0 ? (
               <div className="p-6 text-center text-gray-500">No pending approvals</div>
             ) : (
-              doctors.map((doctor) => (
-                <div key={doctor._id} className="p-6">
+              engineers.map((engineer) => (
+                <div key={engineer._id} className="p-6">
                   <div className="flex items-start space-x-6">
                     <div className="flex-shrink-0">
-                      {doctor.passportPhoto ? (
+                      {engineer.passportPhoto ? (
                         <img
-                          src={doctor.passportPhoto}
-                          alt={doctor.name}
+                          src={engineer.passportPhoto}
+                          alt={engineer.name}
                           className="h-24 w-24 rounded-lg object-cover"
                         />
                       ) : (
                         <div className="h-24 w-24 rounded-lg bg-gray-200 flex items-center justify-center">
-                          <span className="text-2xl text-gray-500">{doctor.name.charAt(0)}</span>
+                          <span className="text-2xl text-gray-500">{engineer.name.charAt(0)}</span>
                         </div>
                       )}
                     </div>
@@ -135,36 +135,36 @@ export default function Admin() {
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h2 className="text-xl font-semibold text-gray-900">{doctor.name}</h2>
-                          <p className="text-sm text-gray-500">Registered on {new Date(doctor.createdAt).toLocaleDateString()}</p>
+                          <h2 className="text-xl font-semibold text-gray-900">{engineer.name}</h2>
+                          <p className="text-sm text-gray-500">Registered on {new Date(engineer.createdAt).toLocaleDateString()}</p>
                         </div>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          doctor.status === 'approved' ? 'bg-green-100 text-green-800' :
-                          doctor.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                          engineer.status === 'approved' ? 'bg-green-100 text-green-800' :
+                          engineer.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                           'bg-red-100 text-red-800'
                         }`}>
-                          {doctor.status.charAt(0).toUpperCase() + doctor.status.slice(1)}
+                          {engineer.status.charAt(0).toUpperCase() + engineer.status.slice(1)}
                         </span>
                       </div>
 
                       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                           <p className="text-sm text-gray-500">Email</p>
-                          <p className="text-sm font-medium text-gray-900">{doctor.email}</p>
+                          <p className="text-sm font-medium text-gray-900">{engineer.email}</p>
                         </div>
                         <div>
                           <p className="text-sm text-gray-500">Phone</p>
-                          <p className="text-sm font-medium text-gray-900">{doctor.phone}</p>
+                          <p className="text-sm font-medium text-gray-900">{engineer.phone}</p>
                         </div>
                         <div>
                           <p className="text-sm text-gray-500">Qualification</p>
-                          <p className="text-sm font-medium text-gray-900">{doctor.qualification}</p>
+                          <p className="text-sm font-medium text-gray-900">{engineer.qualification}</p>
                         </div>
-                        {doctor.certificates && (
+                        {engineer.certificates && (
                           <div>
                             <p className="text-sm text-gray-500">Certificates</p>
                             <a
-                              href={doctor.certificates}
+                              href={engineer.certificates}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-sm text-blue-600 hover:underline"
@@ -175,7 +175,7 @@ export default function Admin() {
                         )}
                       </div>
 
-                      {selectedDoctor?._id === doctor._id ? (
+                      {selectedEngineer?._id === engineer._id ? (
                         <div className="mt-4 bg-gray-50 p-4 rounded-lg">
                           <div className="space-y-4">
                             <div>
@@ -205,13 +205,13 @@ export default function Admin() {
                             </div>
                             <div className="flex justify-end space-x-3">
                               <button
-                                onClick={() => setSelectedDoctor(null)}
+                                onClick={() => setSelectedEngineer(null)}
                                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                               >
                                 Cancel
                               </button>
                               <button
-                                onClick={() => handleApprove(doctor._id)}
+                                onClick={() => handleApprove(engineer._id)}
                                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                               >
                                 Confirm Approval
@@ -222,17 +222,17 @@ export default function Admin() {
                       ) : (
                         <div className="mt-4 flex space-x-3">
                           <button
-                            onClick={() => setSelectedDoctor(doctor)}
+                            onClick={() => setSelectedEngineer(engineer)}
                             className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                           >
-                            Approve Doctor
+                            Approve Engineer
                           </button>
                           <button
                             onClick={() => {
                               const reason = window.prompt('Enter reason for marking as deceased (optional):');
                               const disease = window.prompt('Enter disease name (optional):');
                               if (reason !== null || disease !== null) {
-                                handleMarkDeceased(doctor._id, {
+                                handleMarkDeceased(engineer._id, {
                                   reason: reason || undefined,
                                   diseaseName: disease || undefined
                                 });

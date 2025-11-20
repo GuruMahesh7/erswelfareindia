@@ -14,7 +14,7 @@ interface FormData {
   passportPhoto: File | null;
   certificates: File | null;
   houseAddress: string;
-  clinicAddress: string;
+  officeAddress: string;
   nomineeName: string;
   nomineeAge: string;
   nomineeSex: string;
@@ -55,7 +55,7 @@ export default function JoinNow() {
     passportPhoto: null,
     certificates: null,
     houseAddress: '',
-    clinicAddress: '',
+    officeAddress: '',
     nomineeName: '',
     nomineeAge: '',
     nomineeSex: '',
@@ -132,7 +132,7 @@ export default function JoinNow() {
   if (!formData.passportPhoto) newErrors.passportPhoto = 'Passport photo is required';
   if (!formData.certificates) newErrors.certificates = 'Certificates are required';
     if (!formData.houseAddress.trim()) newErrors.houseAddress = 'House address is required';
-    if (!formData.clinicAddress.trim()) newErrors.clinicAddress = 'Clinic address is required';
+    if (!formData.officeAddress.trim()) newErrors.officeAddress = 'Office address is required';
 
   if (!formData.nomineeName.trim()) newErrors.nomineeName = 'Nominee name is required';
   if (!formData.nomineeAge) newErrors.nomineeAge = 'Nominee age is required';
@@ -176,7 +176,7 @@ export default function JoinNow() {
         form.append('email', formData.email);
         form.append('password', formData.password);
         form.append('houseAddress', formData.houseAddress);
-        form.append('clinicAddress', formData.clinicAddress);
+        form.append('officeAddress', formData.officeAddress);
         form.append('acceptTerms', formData.termsAccepted ? 'true' : 'false');
         form.append('subscribeUpdates', formData.subscribe ? 'true' : 'false');
 
@@ -249,18 +249,18 @@ export default function JoinNow() {
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Application Submitted Successfully!</h2>
             <p className="text-lg text-gray-700 mb-6">
-              Thank you for applying to drswelfareindia. We have received your application and will verify your documents within 2-3 business days.
+              Thank you for applying to erswelfareindia. We have received your application and will verify your documents within 2-3 business days.
             </p>
             <p className="text-gray-600 mb-8">
               A confirmation email has been sent to <strong>{formData.email}</strong> with further instructions.
             </p>
-            <p className="text-blue-600 mb-6">
+            <p className="text-accent mb-6">
               You will be redirected to the login page in a moment...
             </p>
             <div className="space-y-4">
               <a
                 href="/"
-                className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="inline-block bg-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-warning transition-colors"
               >
                 Return to Home
               </a>
@@ -273,10 +273,12 @@ export default function JoinNow() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <section className="bg-gradient-to-r from-accent to-warning text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Join drswelfareindia</h1>
-          <p className="text-xl text-blue-100 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Join erswelfareindia
+          </h1>
+          <p className="text-xl text-steel-500 max-w-3xl">
             Complete the registration form below to become a member
           </p>
         </div>
@@ -284,15 +286,25 @@ export default function JoinNow() {
 
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-2xl shadow-lg p-8 md:p-12"
+          >
             <div className="mb-10">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Personal Information</h2>
-              <p className="text-gray-600">Please provide your personal details</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Personal Information
+              </h2>
+              <p className="text-gray-600">
+                Please provide your personal details
+              </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Full Name *
                 </label>
                 <input
@@ -301,13 +313,20 @@ export default function JoinNow() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="age"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Age *
                 </label>
                 <input
@@ -316,13 +335,20 @@ export default function JoinNow() {
                   name="age"
                   value={formData.age}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.age ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.age ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 />
-                {errors.age && <p className="text-red-500 text-sm mt-1">{errors.age}</p>}
+                {errors.age && (
+                  <p className="text-red-500 text-sm mt-1">{errors.age}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="sex" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="sex"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Sex *
                 </label>
                 <select
@@ -330,18 +356,25 @@ export default function JoinNow() {
                   name="sex"
                   value={formData.sex}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.sex ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.sex ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 >
                   <option value="">Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
                 </select>
-                {errors.sex && <p className="text-red-500 text-sm mt-1">{errors.sex}</p>}
+                {errors.sex && (
+                  <p className="text-red-500 text-sm mt-1">{errors.sex}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="qualification" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="qualification"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Qualification *
                 </label>
                 <select
@@ -349,17 +382,26 @@ export default function JoinNow() {
                   name="qualification"
                   value={formData.qualification}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.qualification ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.qualification ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 >
                   <option value="">Select</option>
-                  <option value="Doctor">Doctor</option>
-                  <option value="Dentist">Dentist</option>
+                  <option value="Engineer">Engineer</option>
+                  <option value="Technician">Technician</option>
                 </select>
-                {errors.qualification && <p className="text-red-500 text-sm mt-1">{errors.qualification}</p>}
+                {errors.qualification && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.qualification}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="mobile"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Mobile Number *
                 </label>
                 <input
@@ -368,13 +410,20 @@ export default function JoinNow() {
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.mobile ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.mobile ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 />
-                {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
+                {errors.mobile && (
+                  <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>
+                )}
               </div>
 
               <div>
-                <label htmlFor="alternateMobile" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="alternateMobile"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Alternate Mobile Number
                 </label>
                 <input
@@ -388,7 +437,10 @@ export default function JoinNow() {
               </div>
 
               <div className="md:col-span-2">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Email Address *
                 </label>
                 <input
@@ -397,13 +449,20 @@ export default function JoinNow() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div className="md:col-span-2">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
                   Password *
                 </label>
                 <input
@@ -413,18 +472,27 @@ export default function JoinNow() {
                   placeholder="Create a secure password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  className={`w-full px-4 py-2 border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                 />
-                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                )}
               </div>
             </div>
 
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Document Upload</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Document Upload
+              </h3>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="passportPhoto" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="passportPhoto"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Passport Photo *
                   </label>
                   <div className="relative">
@@ -438,19 +506,32 @@ export default function JoinNow() {
                     />
                     <label
                       htmlFor="passportPhoto"
-                      className={`flex items-center justify-center w-full px-4 py-3 border-2 ${errors.passportPhoto ? 'border-red-500' : 'border-gray-300'} border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors`}
+                      className={`flex items-center justify-center w-full px-4 py-3 border-2 ${
+                        errors.passportPhoto
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors`}
                     >
                       <Upload className="mr-2 text-gray-400" size={20} />
                       <span className="text-gray-600">
-                        {formData.passportPhoto ? formData.passportPhoto.name : 'Choose file'}
+                        {formData.passportPhoto
+                          ? formData.passportPhoto.name
+                          : "Choose file"}
                       </span>
                     </label>
                   </div>
-                  {errors.passportPhoto && <p className="text-red-500 text-sm mt-1">{errors.passportPhoto}</p>}
+                  {errors.passportPhoto && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.passportPhoto}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="certificates" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="certificates"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Certificates *
                   </label>
                   <div className="relative">
@@ -464,25 +545,40 @@ export default function JoinNow() {
                     />
                     <label
                       htmlFor="certificates"
-                      className={`flex items-center justify-center w-full px-4 py-3 border-2 ${errors.certificates ? 'border-red-500' : 'border-gray-300'} border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors`}
+                      className={`flex items-center justify-center w-full px-4 py-3 border-2 ${
+                        errors.certificates
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition-colors`}
                     >
                       <Upload className="mr-2 text-gray-400" size={20} />
                       <span className="text-gray-600">
-                        {formData.certificates ? formData.certificates.name : 'Choose file'}
+                        {formData.certificates
+                          ? formData.certificates.name
+                          : "Choose file"}
                       </span>
                     </label>
                   </div>
-                  {errors.certificates && <p className="text-red-500 text-sm mt-1">{errors.certificates}</p>}
+                  {errors.certificates && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.certificates}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Address Information</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Address Information
+              </h3>
 
               <div className="space-y-6">
                 <div>
-                  <label htmlFor="houseAddress" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="houseAddress"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     House Address *
                   </label>
                   <textarea
@@ -491,34 +587,56 @@ export default function JoinNow() {
                     value={formData.houseAddress}
                     onChange={handleChange}
                     rows={3}
-                    className={`w-full px-4 py-2 border ${errors.houseAddress ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.houseAddress ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   ></textarea>
-                  {errors.houseAddress && <p className="text-red-500 text-sm mt-1">{errors.houseAddress}</p>}
+                  {errors.houseAddress && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.houseAddress}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="clinicAddress" className="block text-sm font-medium text-gray-700 mb-2">
-                    Clinic Address *
+                  <label
+                    htmlFor="officeAddress"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Office Address *
                   </label>
                   <textarea
-                    id="clinicAddress"
-                    name="clinicAddress"
-                    value={formData.clinicAddress}
+                    id="officeAddress"
+                    name="officeAddress"
+                    value={formData.officeAddress}
                     onChange={handleChange}
                     rows={3}
-                    className={`w-full px-4 py-2 border ${errors.clinicAddress ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.officeAddress
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   ></textarea>
-                  {errors.clinicAddress && <p className="text-red-500 text-sm mt-1">{errors.clinicAddress}</p>}
+                  {errors.officeAddress && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.officeAddress}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="mb-8 bg-blue-50 p-6 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Nominee Details</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Nominee Details
+              </h3>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="nomineeName" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeName"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Nominee Name *
                   </label>
                   <input
@@ -527,13 +645,22 @@ export default function JoinNow() {
                     name="nomineeName"
                     value={formData.nomineeName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeName ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeName ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeName && <p className="text-red-500 text-sm mt-1">{errors.nomineeName}</p>}
+                  {errors.nomineeName && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeName}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="nomineeAge" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeAge"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Nominee Age *
                   </label>
                   <input
@@ -542,13 +669,22 @@ export default function JoinNow() {
                     name="nomineeAge"
                     value={formData.nomineeAge}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeAge ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeAge ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeAge && <p className="text-red-500 text-sm mt-1">{errors.nomineeAge}</p>}
+                  {errors.nomineeAge && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeAge}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="nomineeSex" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeSex"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Nominee Sex *
                   </label>
                   <select
@@ -556,18 +692,27 @@ export default function JoinNow() {
                     name="nomineeSex"
                     value={formData.nomineeSex}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeSex ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeSex ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   >
                     <option value="">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                   </select>
-                  {errors.nomineeSex && <p className="text-red-500 text-sm mt-1">{errors.nomineeSex}</p>}
+                  {errors.nomineeSex && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeSex}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="nomineeEmail" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeEmail"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Nominee Email *
                   </label>
                   <input
@@ -576,13 +721,22 @@ export default function JoinNow() {
                     name="nomineeEmail"
                     value={formData.nomineeEmail}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeEmail ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeEmail ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeEmail && <p className="text-red-500 text-sm mt-1">{errors.nomineeEmail}</p>}
+                  {errors.nomineeEmail && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeEmail}
+                    </p>
+                  )}
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="nomineePhone" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineePhone"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Nominee Phone *
                   </label>
                   <input
@@ -591,28 +745,48 @@ export default function JoinNow() {
                     name="nomineePhone"
                     value={formData.nomineePhone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineePhone ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineePhone ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineePhone && <p className="text-red-500 text-sm mt-1">{errors.nomineePhone}</p>}
+                  {errors.nomineePhone && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineePhone}
+                    </p>
+                  )}
                 </div>
 
-                  <div>
-                    <label htmlFor="nomineeBankHolder" className="block text-sm font-medium text-gray-700 mb-2">
-                      Bank Holder Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="nomineeBankHolder"
-                      name="nomineeBankHolder"
-                      value={formData.nomineeBankHolder}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-2 border ${errors.nomineeBankHolder ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
-                    />
-                    {errors.nomineeBankHolder && <p className="text-red-500 text-sm mt-1">{errors.nomineeBankHolder}</p>}
-                  </div>
+                <div>
+                  <label
+                    htmlFor="nomineeBankHolder"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Bank Holder Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="nomineeBankHolder"
+                    name="nomineeBankHolder"
+                    value={formData.nomineeBankHolder}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeBankHolder
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                  />
+                  {errors.nomineeBankHolder && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeBankHolder}
+                    </p>
+                  )}
+                </div>
 
                 <div>
-                  <label htmlFor="nomineeBankAccount" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeBankAccount"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Bank Account Number *
                   </label>
                   <input
@@ -621,13 +795,24 @@ export default function JoinNow() {
                     name="nomineeBankAccount"
                     value={formData.nomineeBankAccount}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeBankAccount ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeBankAccount
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeBankAccount && <p className="text-red-500 text-sm mt-1">{errors.nomineeBankAccount}</p>}
+                  {errors.nomineeBankAccount && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeBankAccount}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label htmlFor="nomineeBankAccountConfirm" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeBankAccountConfirm"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Confirm Account Number *
                   </label>
                   <input
@@ -636,13 +821,24 @@ export default function JoinNow() {
                     name="nomineeBankAccountConfirm"
                     value={formData.nomineeBankAccountConfirm}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeBankAccountConfirm ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeBankAccountConfirm
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeBankAccountConfirm && <p className="text-red-500 text-sm mt-1">{errors.nomineeBankAccountConfirm}</p>}
+                  {errors.nomineeBankAccountConfirm && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeBankAccountConfirm}
+                    </p>
+                  )}
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="nomineeIFSC" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="nomineeIFSC"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     IFSC Code *
                   </label>
                   <input
@@ -651,19 +847,30 @@ export default function JoinNow() {
                     name="nomineeIFSC"
                     value={formData.nomineeIFSC}
                     onChange={handleChange}
-                    className={`w-full px-4 py-2 border ${errors.nomineeIFSC ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                    className={`w-full px-4 py-2 border ${
+                      errors.nomineeIFSC ? "border-red-500" : "border-gray-300"
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                   />
-                  {errors.nomineeIFSC && <p className="text-red-500 text-sm mt-1">{errors.nomineeIFSC}</p>}
+                  {errors.nomineeIFSC && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.nomineeIFSC}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="mb-8 bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Family Member 1 (Optional)</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Family Member 1 (Optional)
+              </h3>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="family1Name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Name
                   </label>
                   <input
@@ -677,7 +884,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family1Age" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Age"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Age
                   </label>
                   <input
@@ -691,7 +901,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family1Sex" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Sex"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Sex
                   </label>
                   <select
@@ -709,7 +922,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family1Email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Email
                   </label>
                   <input
@@ -723,7 +939,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family1Mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Mobile"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Mobile
                   </label>
                   <input
@@ -737,7 +956,10 @@ export default function JoinNow() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="family1Address" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family1Address"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Address
                   </label>
                   <textarea
@@ -753,11 +975,16 @@ export default function JoinNow() {
             </div>
 
             <div className="mb-8 bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Family Member 2 (Optional)</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Family Member 2 (Optional)
+              </h3>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="family2Name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Name
                   </label>
                   <input
@@ -771,7 +998,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family2Age" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Age"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Age
                   </label>
                   <input
@@ -785,7 +1015,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family2Sex" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Sex"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Sex
                   </label>
                   <select
@@ -803,7 +1036,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family2Email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Email
                   </label>
                   <input
@@ -817,7 +1053,10 @@ export default function JoinNow() {
                 </div>
 
                 <div>
-                  <label htmlFor="family2Mobile" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Mobile"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Mobile
                   </label>
                   <input
@@ -831,7 +1070,10 @@ export default function JoinNow() {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label htmlFor="family2Address" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="family2Address"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Address
                   </label>
                   <textarea
@@ -856,11 +1098,21 @@ export default function JoinNow() {
                   onChange={handleChange}
                   className="mt-1 mr-3 h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="termsAccepted" className="text-sm text-gray-700">
-                  I accept the <Link to="/terms" className="text-blue-600 hover:underline">Terms & Conditions</Link> and understand that all information provided is accurate and complete. *
+                <label
+                  htmlFor="termsAccepted"
+                  className="text-sm text-gray-700"
+                >
+                  I accept the{" "}
+                  <Link to="/terms" className="text-blue-600 hover:underline">
+                    Terms & Conditions
+                  </Link>{" "}
+                  and understand that all information provided is accurate and
+                  complete. *
                 </label>
               </div>
-              {errors.termsAccepted && <p className="text-red-500 text-sm">{errors.termsAccepted}</p>}
+              {errors.termsAccepted && (
+                <p className="text-red-500 text-sm">{errors.termsAccepted}</p>
+              )}
 
               <div className="flex items-start">
                 <input
@@ -875,7 +1127,9 @@ export default function JoinNow() {
                   I want to receive updates and newsletters *
                 </label>
               </div>
-              {errors.subscribe && <p className="text-red-500 text-sm">{errors.subscribe}</p>}
+              {errors.subscribe && (
+                <p className="text-red-500 text-sm">{errors.subscribe}</p>
+              )}
             </div>
 
             <div className="text-center">
@@ -883,9 +1137,9 @@ export default function JoinNow() {
                 type="submit"
                 disabled={isSubmitting}
                 className={`px-12 py-4 rounded-lg font-semibold transition-colors text-lg flex items-center justify-center mx-auto ${
-                  isSubmitting 
-                    ? 'bg-gray-400 text-gray-200 cursor-not-allowed' 
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                  isSubmitting
+                    ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                    : "bg-accent text-white hover:bg-warning"
                 }`}
               >
                 {isSubmitting ? (
@@ -894,7 +1148,7 @@ export default function JoinNow() {
                     Submitting...
                   </>
                 ) : (
-                  'Submit Application'
+                  "Submit Application"
                 )}
               </button>
               <p className="text-sm text-gray-600 mt-4">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api/backend';
 
-interface Doctor {
+interface Engineer {
   _id: string;
   name: string;
   age: string;
@@ -13,7 +13,7 @@ interface Doctor {
   passportPhoto: string;
   certificates: string;
   houseAddress: string;
-  clinicAddress: string;
+  officeAddress: string;
   nominee: {
     name: string;
     age: string;
@@ -43,7 +43,7 @@ interface Doctor {
 }
 
 export default function Profile() {
-  const [doctor, setDoctor] = useState<Doctor | null>(null);
+  const [engineer, setEngineer] = useState<Engineer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -75,9 +75,9 @@ export default function Profile() {
           return;
         }
 
-        // Use the specific doctor endpoint
-        const data = await api.doctors.get(userId);
-        setDoctor(data);
+        // Use the specific engineer endpoint
+        const data = await api.engineers.get(userId);
+        setEngineer(data);
         
         // Store userId for future use
         localStorage.setItem('userId', userId);
@@ -103,7 +103,7 @@ export default function Profile() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!doctor) return;
+    if (!engineer) return;
     setError('');
     setIsSubmitting(true);
 
@@ -122,7 +122,7 @@ export default function Profile() {
       
       const fields = [
         'name', 'age', 'sex', 'qualification', 'phone', 'alternateMobile',
-        'email', 'houseAddress', 'clinicAddress'
+        'email', 'houseAddress', 'officeAddress'
       ];
 
       fields.forEach(field => {
@@ -151,11 +151,11 @@ export default function Profile() {
 
       // Create nominee object with all details
       const nominee = {
-        name: formElements.nomineeName.value || doctor.nominee?.name,
-        age: formElements.nomineeAge.value || doctor.nominee?.age,
-        sex: formElements.nomineeSex.value || doctor.nominee?.sex,
-        email: formElements.nomineeEmail.value || doctor.nominee?.email,
-        phone: formElements.nomineePhone.value || doctor.nominee?.phone,
+        name: formElements.nomineeName.value || engineer.nominee?.name,
+        age: formElements.nomineeAge.value || engineer.nominee?.age,
+        sex: formElements.nomineeSex.value || engineer.nominee?.sex,
+        email: formElements.nomineeEmail.value || engineer.nominee?.email,
+        phone: formElements.nomineePhone.value || engineer.nominee?.phone,
         bankAccountNumber: nomineeBankAccount,
         confirmBankAccountNumber: nomineeBankAccountConfirm, // This will be removed by backend
         ifscCode: nomineeIFSC,
@@ -164,10 +164,10 @@ export default function Profile() {
 
       formData.append('nominee', JSON.stringify(nominee));
 
-      await api.doctors.updateProfile(doctor._id, formData);
+      await api.engineers.updateProfile(engineer._id, formData);
       // Refresh the data after successful update
-      const updatedData = await api.doctors.get(doctor._id);
-      setDoctor(updatedData);
+      const updatedData = await api.engineers.get(engineer._id);
+      setEngineer(updatedData);
       setSuccessMessage('Profile updated successfully');
       setTimeout(() => setSuccessMessage(''), 3000);
       setError(''); // Clear any existing errors
@@ -181,7 +181,7 @@ export default function Profile() {
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   if (error) return <div className="min-h-screen flex items-center justify-center text-red-600">{error}</div>;
-  if (!doctor) return <div className="min-h-screen flex items-center justify-center">No profile data found</div>;
+  if (!engineer) return <div className="min-h-screen flex items-center justify-center">No profile data found</div>;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -189,7 +189,7 @@ export default function Profile() {
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">
-              Welcome, <span className="text-blue-600">{doctor.name}</span>! 👋
+              Welcome, <span className="text-blue-600">{engineer.name}</span>! 👷
             </h1>
             <p className="text-gray-600 mt-2">View and manage your profile information</p>
           </div>
@@ -230,7 +230,7 @@ export default function Profile() {
                     type="text"
                     id="name"
                     name="name"
-                    defaultValue={doctor.name}
+                    defaultValue={engineer.name}
                     className={`mt-1 block w-full rounded-lg shadow-sm p-2 ${
                       isEditing 
                         ? 'border border-gray-300 bg-white' 
@@ -248,7 +248,7 @@ export default function Profile() {
                     type="email"
                     id="email"
                     name="email"
-                    defaultValue={doctor.email}
+                    defaultValue={engineer.email}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -262,7 +262,7 @@ export default function Profile() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    defaultValue={doctor.phone}
+                    defaultValue={engineer.phone}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -276,7 +276,7 @@ export default function Profile() {
                     type="tel"
                     id="alternateMobile"
                     name="alternateMobile"
-                    defaultValue={doctor.alternateMobile}
+                    defaultValue={engineer.alternateMobile}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -290,7 +290,7 @@ export default function Profile() {
                     type="number"
                     id="age"
                     name="age"
-                    defaultValue={doctor.age}
+                    defaultValue={engineer.age}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -303,7 +303,7 @@ export default function Profile() {
                   <select
                     id="sex"
                     name="sex"
-                    defaultValue={doctor.sex}
+                    defaultValue={engineer.sex}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   >
@@ -321,9 +321,9 @@ export default function Profile() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Current Passport Photo</label>
-                  {doctor.passportPhoto && (
+                  {engineer.passportPhoto && (
                     <img
-                      src={doctor.passportPhoto}
+                      src={engineer.passportPhoto}
                       alt="Passport"
                       className="mt-2 h-32 w-32 object-cover rounded-lg"
                     />
@@ -344,9 +344,9 @@ export default function Profile() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Current Certificates</label>
-                  {doctor.certificates && (
+                  {engineer.certificates && (
                     <a
-                      href={doctor.certificates}
+                      href={engineer.certificates}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mt-2 inline-block text-blue-600 hover:underline"
@@ -382,21 +382,21 @@ export default function Profile() {
                     id="houseAddress"
                     name="houseAddress"
                     rows={3}
-                    defaultValue={doctor.houseAddress}
+                    defaultValue={engineer.houseAddress}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="clinicAddress" className="block text-sm font-medium text-gray-700">
-                    Clinic Address
+                  <label htmlFor="officeAddress" className="block text-sm font-medium text-gray-700">
+                    Office Address
                   </label>
                   <textarea
-                    id="clinicAddress"
-                    name="clinicAddress"
+                    id="officeAddress"
+                    name="officeAddress"
                     rows={3}
-                    defaultValue={doctor.clinicAddress}
+                    defaultValue={engineer.officeAddress}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -416,7 +416,7 @@ export default function Profile() {
                     type="text"
                     id="nomineeName"
                     name="nomineeName"
-                    defaultValue={doctor.nominee?.name}
+                    defaultValue={engineer.nominee?.name}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -430,7 +430,7 @@ export default function Profile() {
                     type="number"
                     id="nomineeAge"
                     name="nomineeAge"
-                    defaultValue={doctor.nominee?.age}
+                    defaultValue={engineer.nominee?.age}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -443,7 +443,7 @@ export default function Profile() {
                   <select
                     id="nomineeSex"
                     name="nomineeSex"
-                    defaultValue={doctor.nominee?.sex}
+                    defaultValue={engineer.nominee?.sex}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   >
@@ -461,7 +461,7 @@ export default function Profile() {
                     type="email"
                     id="nomineeEmail"
                     name="nomineeEmail"
-                    defaultValue={doctor.nominee?.email}
+                    defaultValue={engineer.nominee?.email}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -475,7 +475,7 @@ export default function Profile() {
                     type="tel"
                     id="nomineePhone"
                     name="nomineePhone"
-                    defaultValue={doctor.nominee?.phone}
+                    defaultValue={engineer.nominee?.phone}
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
                   />
@@ -489,7 +489,7 @@ export default function Profile() {
                     type="text"
                     id="nomineeBankAccount"
                     name="nomineeBankAccount"
-                    defaultValue={doctor.nominee?.bankAccountNumber}
+                    defaultValue={engineer.nominee?.bankAccountNumber}
                     required
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
@@ -518,7 +518,7 @@ export default function Profile() {
                     type="text"
                     id="nomineeIFSC"
                     name="nomineeIFSC"
-                    defaultValue={doctor.nominee?.ifscCode}
+                    defaultValue={engineer.nominee?.ifscCode}
                     required
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}
@@ -533,7 +533,7 @@ export default function Profile() {
                     type="text"
                     id="nomineeBankHolder"
                     name="nomineeBankHolder"
-                    defaultValue={doctor.nominee?.bankHolderName}
+                    defaultValue={engineer.nominee?.bankHolderName}
                     required
                     className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm p-2"
                     disabled={!isEditing}

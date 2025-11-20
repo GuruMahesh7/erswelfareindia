@@ -60,11 +60,11 @@ export default function Login() {
       <div className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
           <div className="text-center mb-8">
-            <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-warning w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="text-white" size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-            <p className="text-gray-600">Sign in to access your drswelfareindia member portal</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, Engineer</h2>
+            <p className="text-gray-600">Sign in to access your erswelfareindia member portal</p>
           </div>
 
           {loginSuccess && (
@@ -126,7 +126,7 @@ export default function Login() {
                   Remember me
                 </label>
               </div>
-              <a href="#" className="text-sm text-blue-600 hover:text-blue-700">
+              <a href="#" className="text-sm text-accent hover:text-warning font-semibold">
                 Forgot password?
               </a>
             </div>
@@ -134,7 +134,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center justify-center"
+              className="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-warning transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {isSubmitting ? (
                 <>
@@ -153,7 +153,7 @@ export default function Login() {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <Link to="/join" className="text-blue-600 hover:text-blue-700 font-semibold">
+              <Link to="/join" className="text-accent hover:text-warning font-semibold">
                 Join Now
               </Link>
             </p>
@@ -161,7 +161,7 @@ export default function Login() {
 
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-600 text-center">
-              For assistance with your account, please contact our support team
+              For engineering portal help, please contact our support team
             </p>
           </div>
         </div>

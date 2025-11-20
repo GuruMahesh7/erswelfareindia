@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', 'Roboto Slab', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', 'Poppins', serif;
+}
+.engineering-theme-bg {
+  @apply bg-blueprint bg-engineering-grid;
 }
 
 body {

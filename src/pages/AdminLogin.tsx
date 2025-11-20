@@ -40,8 +40,8 @@ export default function AdminLogin() {
             <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <ShieldCheck className="text-white" size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Admin Portal</h2>
-            <p className="text-gray-600">Sign in to access the administrative dashboard</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Engineer Welfare Admin Portal</h2>
+            <p className="text-gray-600">Sign in to access the erswelfareindia administration dashboard</p>
           </div>
 
           {error && (

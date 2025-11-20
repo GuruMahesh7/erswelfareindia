@@ -41,7 +41,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <section className="bg-gradient-to-r from-accent to-warning text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
           <p className="text-xl text-blue-100 max-w-3xl">
@@ -50,13 +50,17 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-steel-50 bg-engineering-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Get In Touch</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Get In Touch
+              </h2>
               <p className="text-gray-700 mb-8 leading-relaxed">
-                Our team is here to help you with any questions about drswelfareindia membership, benefits, or support. Fill out the form and we'll get back to you within 24 hours.
+                You can reach the erswelfareindia engineering team for any
+                technical, membership or project inquiry. Fill the form and our
+                engineers will contact you soon.
               </p>
 
               <div className="space-y-6">
@@ -65,11 +69,15 @@ export default function Contact() {
                     <MapPin className="text-blue-600" size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Our Office</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      Our Office
+                    </h3>
                     <p className="text-gray-600">
-                      123 Healthcare Avenue<br />
-                      Medical District<br />
-                      City 12345
+                      14 Engineering Hub
+                      <br />
+                      Industrial Park
+                      <br />
+                      Tech City 54321
                     </p>
                   </div>
                 </div>
@@ -91,8 +99,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">drswelfareindia@gmail.com</p>
-                    <p className="text-gray-600">drswelfareindia@gmail.com</p>
+                    <p className="text-gray-600">erswelfareindia@gmail.com</p>
+                    <p className="text-gray-600">erswelfareindia@gmail.com</p>
                   </div>
                 </div>
 
@@ -101,9 +109,15 @@ export default function Contact() {
                     <Clock className="text-blue-600" size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Business Hours</h3>
-                    <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p className="text-gray-600">Saturday: 10:00 AM - 4:00 PM</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      Business Hours
+                    </h3>
+                    <p className="text-gray-600">
+                      Monday - Friday: 9:00 AM - 6:00 PM
+                    </p>
+                    <p className="text-gray-600">
+                      Saturday: 10:00 AM - 4:00 PM
+                    </p>
                     <p className="text-gray-600">Sunday: Closed</p>
                     <p className="text-gray-600 mt-2 text-sm">
                       Emergency support available 24/7
@@ -115,17 +129,23 @@ export default function Contact() {
 
             <div>
               <div className="bg-gray-50 p-8 rounded-xl border border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  Send Us a Message
+                </h2>
 
                 {submitted && (
                   <div className="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-                    Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    Thank you! Your message has been sent successfully. We'll
+                    get back to you soon.
                   </div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Full Name *
                     </label>
                     <input
@@ -141,7 +161,10 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Email Address *
                     </label>
                     <input
@@ -157,7 +180,10 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Phone Number
                     </label>
                     <input
@@ -172,7 +198,10 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Subject *
                     </label>
                     <select
@@ -194,7 +223,10 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Message *
                     </label>
                     <textarea
@@ -211,7 +243,7 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center"
+                    className="w-full bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-warning transition-colors flex items-center justify-center"
                   >
                     Send Message
                     <Send className="ml-2" size={20} />
@@ -225,21 +257,22 @@ export default function Contact() {
 
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-blue-600 rounded-2xl p-8 md:p-12 text-white text-center">
+          <div className="bg-gradient-to-r from-accent to-warning rounded-2xl p-8 md:p-12 text-white text-center">
             <h2 className="text-3xl font-bold mb-4">Emergency Support</h2>
             <p className="text-xl text-blue-100 mb-6">
-              For urgent matters and emergencies, our dedicated support team is available 24/7
+              For urgent matters and emergencies, our dedicated support team is
+              available 24/7
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+15551234567"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                className="bg-white text-warning px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
               >
                 Call Emergency Line
               </a>
               <a
-                href="mailto:drswelfareindia@gmail.com"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                href="mailto:erswelfareindia@gmail.com"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-accent transition-colors"
               >
                 Email Emergency Team
               </a>

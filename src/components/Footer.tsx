@@ -8,11 +8,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Stethoscope className="h-8 w-8 text-blue-400" />
-              <span className="text-xl font-bold">drswelfareindia</span>
+              <img
+                width="44"
+                height="44"
+                className="text-accent"
+                src="https://img.icons8.com/?size=100&id=KRjNOLMxdNYx&format=png&color=FCC419"
+                alt="engineer"
+              />
+              <span className="text-xl font-bold">erswelfareindia</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Supporting healthcare professionals through comprehensive benefits and mutual support schemes.
+              Supporting engineering professionals through comprehensive
+              benefits and mutual support schemes.
             </p>
           </div>
 
@@ -20,22 +27,34 @@ export default function Footer() {
             <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                <Link
+                  to="/about"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                <Link
+                  to="/how-it-works"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+                >
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link to="/membership" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                <Link
+                  to="/membership"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+                >
                   Membership Details
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                <Link
+                  to="/faq"
+                  className="text-gray-400 hover:text-blue-400 transition-colors text-sm"
+                >
                   FAQ
                 </Link>
               </li>
@@ -55,7 +74,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center space-x-2 text-gray-400 text-sm">
                 <Mail size={18} className="flex-shrink-0" />
-                <span>drswelfareindia@gmail.com</span>
+                <span>erswelfareindia@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -63,16 +82,28 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+              >
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+              >
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+              >
                 <Linkedin size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+              >
                 <Instagram size={24} />
               </a>
             </div>
@@ -81,9 +112,21 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 pt-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} drswelfareindia. All rights reserved. |
-            <Link to="/privacy" className="hover:text-blue-400 transition-colors ml-1">Privacy Policy</Link> |
-            <Link to="/terms" className="hover:text-blue-400 transition-colors ml-1">Terms of Service</Link>
+            &copy; {new Date().getFullYear()} erswelfareindia. All rights
+            reserved. |
+            <Link
+              to="/privacy"
+              className="hover:text-blue-400 transition-colors ml-1"
+            >
+              Privacy Policy
+            </Link>{" "}
+            |
+            <Link
+              to="/terms"
+              className="hover:text-blue-400 transition-colors ml-1"
+            >
+              Terms of Service
+            </Link>
           </p>
         </div>
       </div>

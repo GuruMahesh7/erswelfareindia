@@ -13,7 +13,7 @@ import JoinNow from './pages/JoinNow';
 import Login from './pages/Login';
 import Terms from './pages/Terms';
 import Profile from './pages/Profile';
-import Doctors from './pages/Doctors';
+import Engineers from './pages/Engineers';
 import Deceased from './pages/Deceased';
 import Admin from './pages/Admin';
 import AdminLogin from './pages/AdminLogin';
@@ -70,10 +70,10 @@ function App() {
               }
             />
             <Route
-              path="/doctors"
+              path="/engineers"
               element={
                 <ProtectedRoute>
-                  <Doctors />
+                  <Engineers />
                 </ProtectedRoute>
               }
             />
