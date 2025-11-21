@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import api from '../api/backend';
-import { Lock, Mail } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api/backend";
+import { Lock, Mail } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -11,13 +11,13 @@ export default function Login() {
   // Redirect to profile if already logged in
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/profile');
+      navigate("/profile");
     }
   }, [isLoggedIn, navigate]);
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     rememberMe: false,
   });
 
@@ -28,7 +28,7 @@ export default function Login() {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -36,20 +36,24 @@ export default function Login() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await api.doctors.login({ email: formData.email, password: formData.password });
+      const res = await api.engineers.login({
+        email: formData.email,
+        password: formData.password,
+      });
       // backend returns token in the response object
-      const token = (res && (res.token || (res.data && res.data.token))) || res?.token;
+      const token =
+        (res && (res.token || (res.data && res.data.token))) || res?.token;
       if (token) {
         login(token); // Use the auth context login function
         setLoginSuccess(true);
         // Navigate to profile page after a short delay to show success message
         setTimeout(() => {
-          navigate('/profile');
+          navigate("/profile");
         }, 1500);
       }
     } catch (err: any) {
-      console.error('Login error', err);
-      alert(err?.message || 'Login failed');
+      console.error("Login error", err);
+      alert(err?.message || "Login failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -63,8 +67,12 @@ export default function Login() {
             <div className="bg-warning w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock className="text-white" size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back, Engineer</h2>
-            <p className="text-gray-600">Sign in to access your erswelfareindia member portal</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Welcome Back, Engineer
+            </h2>
+            <p className="text-gray-600">
+              Sign in to access your erswelfareindia member portal
+            </p>
           </div>
 
           {loginSuccess && (
@@ -75,11 +83,17 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="email"
                   id="email"
@@ -94,11 +108,17 @@ export default function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="password"
                   id="password"
@@ -122,11 +142,17 @@ export default function Login() {
                   onChange={handleChange}
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="rememberMe" className="ml-2 text-sm text-gray-700">
+                <label
+                  htmlFor="rememberMe"
+                  className="ml-2 text-sm text-gray-700"
+                >
                   Remember me
                 </label>
               </div>
-              <a href="#" className="text-sm text-accent hover:text-warning font-semibold">
+              <a
+                href="#"
+                className="text-sm text-accent hover:text-warning font-semibold"
+              >
                 Forgot password?
               </a>
             </div>
@@ -138,9 +164,25 @@ export default function Login() {
             >
               {isSubmitting ? (
                 <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   <span>Signing in...</span>
                 </>
@@ -152,8 +194,11 @@ export default function Login() {
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/join" className="text-accent hover:text-warning font-semibold">
+              Don't have an account?{" "}
+              <Link
+                to="/join"
+                className="text-accent hover:text-warning font-semibold"
+              >
                 Join Now
               </Link>
             </p>

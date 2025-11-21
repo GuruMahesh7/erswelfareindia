@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Upload, CheckCircle, Loader2 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { Upload, CheckCircle, Loader2 } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 
 interface FormData {
   name: string;
@@ -44,39 +44,39 @@ export default function JoinNow() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    age: '',
-    sex: '',
-    qualification: '',
-    mobile: '',
-    alternateMobile: '',
-    email: '',
-    password: '',
+    name: "",
+    age: "",
+    sex: "",
+    qualification: "",
+    mobile: "",
+    alternateMobile: "",
+    email: "",
+    password: "",
     passportPhoto: null,
     certificates: null,
-    houseAddress: '',
-    officeAddress: '',
-    nomineeName: '',
-    nomineeAge: '',
-    nomineeSex: '',
-    nomineeEmail: '',
-    nomineePhone: '',
-    nomineeBankAccount: '',
-    nomineeBankAccountConfirm: '',
-    nomineeIFSC: '',
-    nomineeBankHolder: '',
-    family1Name: '',
-    family1Age: '',
-    family1Sex: '',
-    family1Email: '',
-    family1Mobile: '',
-    family1Address: '',
-    family2Name: '',
-    family2Age: '',
-    family2Sex: '',
-    family2Email: '',
-    family2Mobile: '',
-    family2Address: '',
+    houseAddress: "",
+    officeAddress: "",
+    nomineeName: "",
+    nomineeAge: "",
+    nomineeSex: "",
+    nomineeEmail: "",
+    nomineePhone: "",
+    nomineeBankAccount: "",
+    nomineeBankAccountConfirm: "",
+    nomineeIFSC: "",
+    nomineeBankHolder: "",
+    family1Name: "",
+    family1Age: "",
+    family1Sex: "",
+    family1Email: "",
+    family1Mobile: "",
+    family1Address: "",
+    family2Name: "",
+    family2Age: "",
+    family2Sex: "",
+    family2Email: "",
+    family2Mobile: "",
+    family2Address: "",
     termsAccepted: false,
     subscribe: false,
   });
@@ -84,10 +84,14 @@ export default function JoinNow() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value, type } = e.target;
 
-    if (type === 'checkbox') {
+    if (type === "checkbox") {
       const target = e.target as HTMLInputElement;
       setFormData({ ...formData, [name]: target.checked });
     } else {
@@ -95,7 +99,7 @@ export default function JoinNow() {
     }
 
     if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
+      setErrors({ ...errors, [name]: "" });
     }
   };
 
@@ -104,7 +108,7 @@ export default function JoinNow() {
     if (files && files[0]) {
       setFormData({ ...formData, [name]: files[0] });
       if (errors[name]) {
-        setErrors({ ...errors, [name]: '' });
+        setErrors({ ...errors, [name]: "" });
       }
     }
   };
@@ -112,45 +116,65 @@ export default function JoinNow() {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = "Name is required";
     // Age validation: must be a number between 18 and 60 (inclusive)
     if (!formData.age) {
-      newErrors.age = 'Valid age is required (18+)';
+      newErrors.age = "Valid age is required (18+)";
     } else {
       const ageNum = parseInt(formData.age as string, 10);
       if (isNaN(ageNum) || ageNum < 18) {
-        newErrors.age = 'Valid age is required (18+)';
+        newErrors.age = "Valid age is required (18+)";
       } else if (ageNum > 60) {
         // User requested the specific response when age is greater than 60
-        newErrors.age = 'Age should be less than or equal to 60';
+        newErrors.age = "Age should be less than or equal to 60";
       }
     }
-    if (!formData.sex) newErrors.sex = 'Sex is required';
-    if (!formData.qualification) newErrors.qualification = 'Qualification is required';
-    if (!formData.mobile || formData.mobile.length < 10) newErrors.mobile = 'Valid mobile number is required';
-    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid email is required';
-  if (!formData.passportPhoto) newErrors.passportPhoto = 'Passport photo is required';
-  if (!formData.certificates) newErrors.certificates = 'Certificates are required';
-    if (!formData.houseAddress.trim()) newErrors.houseAddress = 'House address is required';
-    if (!formData.officeAddress.trim()) newErrors.officeAddress = 'Office address is required';
+    if (!formData.sex) newErrors.sex = "Sex is required";
+    if (!formData.qualification)
+      newErrors.qualification = "Qualification is required";
+    if (!formData.mobile || formData.mobile.length < 10)
+      newErrors.mobile = "Valid mobile number is required";
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Valid email is required";
+    if (!formData.passportPhoto)
+      newErrors.passportPhoto = "Passport photo is required";
+    if (!formData.certificates)
+      newErrors.certificates = "Certificates are required";
+    if (!formData.houseAddress.trim())
+      newErrors.houseAddress = "House address is required";
+    if (!formData.officeAddress.trim())
+      newErrors.officeAddress = "Office address is required";
 
-  if (!formData.nomineeName.trim()) newErrors.nomineeName = 'Nominee name is required';
-  if (!formData.nomineeAge) newErrors.nomineeAge = 'Nominee age is required';
-  if (!formData.nomineeSex) newErrors.nomineeSex = 'Nominee sex is required';
-  if (!formData.nomineeEmail || !/\S+@\S+\.\S+/.test(formData.nomineeEmail)) newErrors.nomineeEmail = 'Valid nominee email is required';
-  if (!formData.nomineePhone) newErrors.nomineePhone = 'Nominee phone is required';
-  if (!formData.nomineeBankAccount.trim()) newErrors.nomineeBankAccount = 'Bank account is required';
-  if (formData.nomineeBankAccount.trim() !== formData.nomineeBankAccountConfirm.trim()) newErrors.nomineeBankAccountConfirm = 'Account numbers do not match';
-  if (!formData.nomineeIFSC.trim()) newErrors.nomineeIFSC = 'IFSC code is required';
-  if (!formData.nomineeBankHolder.trim()) newErrors.nomineeBankHolder = 'Bank holder name is required';
+    if (!formData.nomineeName.trim())
+      newErrors.nomineeName = "Nominee name is required";
+    if (!formData.nomineeAge) newErrors.nomineeAge = "Nominee age is required";
+    if (!formData.nomineeSex) newErrors.nomineeSex = "Nominee sex is required";
+    if (!formData.nomineeEmail || !/\S+@\S+\.\S+/.test(formData.nomineeEmail))
+      newErrors.nomineeEmail = "Valid nominee email is required";
+    if (!formData.nomineePhone)
+      newErrors.nomineePhone = "Nominee phone is required";
+    if (!formData.nomineeBankAccount.trim())
+      newErrors.nomineeBankAccount = "Bank account is required";
+    if (
+      formData.nomineeBankAccount.trim() !==
+      formData.nomineeBankAccountConfirm.trim()
+    )
+      newErrors.nomineeBankAccountConfirm = "Account numbers do not match";
+    if (!formData.nomineeIFSC.trim())
+      newErrors.nomineeIFSC = "IFSC code is required";
+    if (!formData.nomineeBankHolder.trim())
+      newErrors.nomineeBankHolder = "Bank holder name is required";
 
-  if (!formData.password || formData.password.length < 6) newErrors.password = 'Password (min 6 chars) is required';
+    if (!formData.password || formData.password.length < 6)
+      newErrors.password = "Password (min 6 chars) is required";
 
-  if (!formData.termsAccepted) newErrors.termsAccepted = 'You must accept the terms and conditions';
-  if (!formData.subscribe) newErrors.subscribe = 'You must opt-in to receive updates';
+    if (!formData.termsAccepted)
+      newErrors.termsAccepted = "You must accept the terms and conditions";
+    if (!formData.subscribe)
+      newErrors.subscribe = "You must opt-in to receive updates";
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -158,7 +182,8 @@ export default function JoinNow() {
     if (!validateForm()) {
       const firstErrorField = Object.keys(errors)[0];
       const element = document.getElementById(firstErrorField);
-      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (element)
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
@@ -167,18 +192,19 @@ export default function JoinNow() {
       try {
         // Build FormData according to backend expectations
         const form = new FormData();
-        form.append('name', formData.name);
-        form.append('age', formData.age);
-        form.append('sex', formData.sex);
-        form.append('qualification', formData.qualification);
-        form.append('phone', formData.mobile);
-        if (formData.alternateMobile) form.append('alternateMobile', formData.alternateMobile);
-        form.append('email', formData.email);
-        form.append('password', formData.password);
-        form.append('houseAddress', formData.houseAddress);
-        form.append('officeAddress', formData.officeAddress);
-        form.append('acceptTerms', formData.termsAccepted ? 'true' : 'false');
-        form.append('subscribeUpdates', formData.subscribe ? 'true' : 'false');
+        form.append("name", formData.name);
+        form.append("age", formData.age);
+        form.append("sex", formData.sex);
+        form.append("qualification", formData.qualification);
+        form.append("phone", formData.mobile);
+        if (formData.alternateMobile)
+          form.append("alternateMobile", formData.alternateMobile);
+        form.append("email", formData.email);
+        form.append("password", formData.password);
+        form.append("houseAddress", formData.houseAddress);
+        form.append("officeAddress", formData.officeAddress);
+        form.append("acceptTerms", formData.termsAccepted ? "true" : "false");
+        form.append("subscribeUpdates", formData.subscribe ? "true" : "false");
 
         // nominee object
         const nominee = {
@@ -192,7 +218,7 @@ export default function JoinNow() {
           ifscCode: formData.nomineeIFSC,
           bankHolderName: formData.nomineeBankHolder,
         };
-        form.append('nominee', JSON.stringify(nominee));
+        form.append("nominee", JSON.stringify(nominee));
 
         const family1 = {
           name: formData.family1Name,
@@ -202,7 +228,7 @@ export default function JoinNow() {
           mobile: formData.family1Mobile,
           address: formData.family1Address,
         };
-        if (family1.name) form.append('familyMember1', JSON.stringify(family1));
+        if (family1.name) form.append("familyMember1", JSON.stringify(family1));
 
         const family2 = {
           name: formData.family2Name,
@@ -212,28 +238,33 @@ export default function JoinNow() {
           mobile: formData.family2Mobile,
           address: formData.family2Address,
         };
-        if (family2.name) form.append('familyMember2', JSON.stringify(family2));
+        if (family2.name) form.append("familyMember2", JSON.stringify(family2));
 
-        if (formData.passportPhoto) form.append('passportPhoto', formData.passportPhoto);
-        if (formData.certificates) form.append('certificates', formData.certificates);
+        if (formData.passportPhoto)
+          form.append("passportPhoto", formData.passportPhoto);
+        if (formData.certificates)
+          form.append("certificates", formData.certificates);
 
         // lazy import api to avoid circulars
-        const api = (await import('../api/backend')).default;
-        const res = await api.doctors.register(form);
+        const api = (await import("../api/backend")).default;
+        const res = await api.engineers.register(form);
         // store token if returned
-        const token = res?.data?.token || res?.token || (res && (res.token || res.data?.token));
-        if (token) localStorage.setItem('token', token);
-        
+        const token =
+          res?.data?.token ||
+          res?.token ||
+          (res && (res.token || res.data?.token));
+        if (token) localStorage.setItem("token", token);
+
         // Redirect to login page after successful registration
         setTimeout(() => {
-          navigate('/login');
+          navigate("/login");
         }, 2000);
-        
+
         setSubmitted(true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err: any) {
-        console.error('Registration error', err);
-        alert(err?.message || 'Failed to submit application');
+        console.error("Registration error", err);
+        alert(err?.message || "Failed to submit application");
         setIsSubmitting(false);
       }
     })();
@@ -247,12 +278,17 @@ export default function JoinNow() {
             <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="text-green-600" size={48} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Application Submitted Successfully!</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Application Submitted Successfully!
+            </h2>
             <p className="text-lg text-gray-700 mb-6">
-              Thank you for applying to erswelfareindia. We have received your application and will verify your documents within 2-3 business days.
+              Thank you for applying to erswelfareindia. We have received your
+              application and will verify your documents within 2-3 business
+              days.
             </p>
             <p className="text-gray-600 mb-8">
-              A confirmation email has been sent to <strong>{formData.email}</strong> with further instructions.
+              A confirmation email has been sent to{" "}
+              <strong>{formData.email}</strong> with further instructions.
             </p>
             <p className="text-accent mb-6">
               You will be redirected to the login page in a moment...

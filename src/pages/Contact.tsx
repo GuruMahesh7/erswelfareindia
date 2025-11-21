@@ -1,19 +1,23 @@
-import { useState } from 'react';
-import api from '../api/backend';
-import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import { useState } from "react";
+import api from "../api/backend";
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -30,12 +34,12 @@ export default function Contact() {
         message: formData.message,
       });
       setSubmitted(true);
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
       setTimeout(() => setSubmitted(false), 3000);
     } catch (err: any) {
-      console.error('Contact submit error', err);
+      console.error("Contact submit error", err);
       // show failure briefly
-      alert(err?.message || 'Failed to send message');
+      alert(err?.message || "Failed to send message");
     }
   };
 

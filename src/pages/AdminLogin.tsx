@@ -1,32 +1,32 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Lock, Mail, ShieldCheck } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import api from '../api/backend';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Lock, Mail, ShieldCheck } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import api from "../api/backend";
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
       const response = await api.admin.login({ email, password });
       if (response.token) {
         login(response.token);
-        navigate('/admin');
+        navigate("/admin");
       } else {
-        setError('Invalid credentials');
+        setError("Invalid credentials");
       }
     } catch (err: any) {
-      setError(err.message || 'Failed to login');
+      setError(err.message || "Failed to login");
     } finally {
       setLoading(false);
     }
@@ -40,8 +40,12 @@ export default function AdminLogin() {
             <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <ShieldCheck className="text-white" size={32} />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Engineer Welfare Admin Portal</h2>
-            <p className="text-gray-600">Sign in to access the erswelfareindia administration dashboard</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Engineer Welfare Admin Portal
+            </h2>
+            <p className="text-gray-600">
+              Sign in to access the erswelfareindia administration dashboard
+            </p>
           </div>
 
           {error && (
@@ -52,11 +56,17 @@ export default function AdminLogin() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Admin Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="email"
                   id="email"
@@ -71,11 +81,17 @@ export default function AdminLogin() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Admin Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="password"
                   id="password"
@@ -96,9 +112,25 @@ export default function AdminLogin() {
             >
               {loading ? (
                 <>
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   <span>Signing in...</span>
                 </>

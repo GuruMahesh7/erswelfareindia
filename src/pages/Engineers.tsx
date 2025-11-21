@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import api from '../api/backend';
+import { useState, useEffect } from "react";
+import api from "../api/backend";
 
 interface Engineer {
   _id: string;
@@ -15,21 +15,21 @@ interface Engineer {
 export default function Engineers() {
   const [engineers, setEngineers] = useState<Engineer[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [error, setError] = useState("");
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     const fetchEngineers = async () => {
       try {
         let data;
-        if (filter === 'all') {
+        if (filter === "all") {
           data = await api.engineers.list();
         } else {
           data = await api.engineers.list(filter);
         }
         setEngineers(data);
       } catch (err: any) {
-        setError(err.message || 'Failed to load engineers');
+        setError(err.message || "Failed to load engineers");
       } finally {
         setLoading(false);
       }
@@ -38,14 +38,26 @@ export default function Engineers() {
     fetchEngineers();
   }, [filter]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  if (error) return <div className="min-h-screen flex items-center justify-center text-red-600">{error}</div>;
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  if (error)
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-600">
+        {error}
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-steel-50 bg-engineering-grid py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-blueprint">Registered Engineers</h1>
+          <h1 className="text-3xl font-bold text-blueprint">
+            Registered Engineers
+          </h1>
           <div className="mt-4">
             <select
               value={filter}
@@ -64,13 +76,22 @@ export default function Engineers() {
             <table className="min-w-full divide-y divide-steel-200">
               <thead className="bg-steel-100">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/2">
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/2"
+                  >
                     Engineer Information
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/3">
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/3"
+                  >
                     Qualification
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/6">
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-bold text-steel-700 uppercase tracking-wider w-1/6"
+                  >
                     Status
                   </th>
                 </tr>
@@ -78,7 +99,10 @@ export default function Engineers() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {engineers.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-6 py-8 text-center text-gray-500 text-sm">
+                    <td
+                      colSpan={4}
+                      className="px-6 py-8 text-center text-gray-500 text-sm"
+                    >
                       No engineers found
                     </td>
                   </tr>
@@ -101,25 +125,32 @@ export default function Engineers() {
                             )}
                           </div>
                           <div>
-                            <div className="text-base font-semibold text-gray-900">{engineer.name}</div>
-                            <div className="text-sm text-gray-500">ID: {engineer._id}</div>
+                            <div className="text-base font-semibold text-gray-900">
+                              {engineer.name}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              ID: {engineer._id}
+                            </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm">
-                          <div className="font-medium text-gray-900">{engineer.qualification}</div>
+                          <div className="font-medium text-gray-900">
+                            {engineer.qualification}
+                          </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <span
                           className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                            engineer.status === 'approved'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
+                            engineer.status === "approved"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
                           }`}
                         >
-                          {engineer.status.charAt(0).toUpperCase() + engineer.status.slice(1)}
+                          {engineer.status.charAt(0).toUpperCase() +
+                            engineer.status.slice(1)}
                         </span>
                       </td>
                     </tr>
