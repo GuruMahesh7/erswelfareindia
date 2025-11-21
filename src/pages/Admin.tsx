@@ -143,16 +143,16 @@ export default function Admin() {
             ) : (
               engineers.map((engineer) => (
                 <div key={engineer._id} className="p-6">
-                  <div className="flex items-start space-x-6">
-                    <div className="flex-shrink-0">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                    <div className="flex-shrink-0 mx-auto sm:mx-0">
                       {engineer.passportPhoto ? (
                         <img
                           src={engineer.passportPhoto}
                           alt={engineer.name}
-                          className="h-24 w-24 rounded-lg object-cover"
+                          className="h-16 w-16 sm:h-24 sm:w-24 rounded-lg object-cover"
                         />
                       ) : (
-                        <div className="h-24 w-24 rounded-lg bg-gray-200 flex items-center justify-center">
+                        <div className="h-16 w-16 sm:h-24 sm:w-24 rounded-lg bg-gray-200 flex items-center justify-center">
                           <span className="text-2xl text-gray-500">
                             {engineer.name.charAt(0)}
                           </span>
@@ -222,7 +222,7 @@ export default function Admin() {
                       </div>
 
                       {selectedEngineer?._id === engineer._id ? (
-                        <div className="mt-4 bg-gray-50 p-4 rounded-lg">
+                        <div className="mt-4 bg-gray-50 p-4 rounded-lg w-full">
                           <div className="space-y-4">
                             <div>
                               <label
@@ -265,16 +265,16 @@ export default function Admin() {
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
                               />
                             </div>
-                            <div className="flex justify-end space-x-3">
+                            <div className="flex flex-col sm:flex-row sm:justify-end sm:space-x-3 space-y-2 sm:space-y-0">
                               <button
                                 onClick={() => setSelectedEngineer(null)}
-                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                                className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
                               >
                                 Cancel
                               </button>
                               <button
                                 onClick={() => handleApprove(engineer._id)}
-                                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                                className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                               >
                                 Confirm Approval
                               </button>
@@ -282,10 +282,10 @@ export default function Admin() {
                           </div>
                         </div>
                       ) : (
-                        <div className="mt-4 flex space-x-3">
+                        <div className="mt-4 flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0 w-full">
                           <button
                             onClick={() => setSelectedEngineer(engineer)}
-                            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                            className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
                           >
                             Approve Engineer
                           </button>
@@ -304,7 +304,7 @@ export default function Admin() {
                                 });
                               }
                             }}
-                            className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700"
+                            className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700"
                           >
                             Mark as Deceased
                           </button>
